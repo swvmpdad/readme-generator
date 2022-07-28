@@ -43,16 +43,16 @@ function generateMarkdown(userData) {
 
   ## Installation
 
-  ${installSteps()}
+  ${installSteps}
 
   ## Usage
+`
+//   ${userData.usage}
 
-  ${userData.usage}
+//   ${credits}
 
-  ${credits}
-
-  ${renderLicenseSection()}
-`;
+//   ${renderLicenseSection()}
+;
 }
 
 module.exports = generateMarkdown;
