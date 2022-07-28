@@ -19,6 +19,21 @@ function renderLicenseSection(license) {
   }
 };
 
+function tableOfContents(userData) {
+    if (userData.confirmToc) {
+        return `
+        ## Table of Contents
+
+        - [Installation](#installation)
+        - [Usage](#usage)
+        - [Credits](#credits)
+        - [License](#license)
+        `;
+    } else {
+        return '';
+    }
+}
+
 function installSteps(instData) {
   return `
   ${instData
@@ -39,7 +54,7 @@ function generateMarkdown(userData) {
   ## Description
   ${userData.description}
 
-  ${toc}
+  ${tableOfContents}
 
   ## Installation
 
