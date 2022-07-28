@@ -1,73 +1,110 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
-
-// TODO: Create a function that returns the license section of README
+// function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  if (license) {
-    renderLicenseBadge(license);
-    renderLicenseLink(license);
-    return licenseBadge;
-    return licenseLink;
-  } else {
-    return '';
-  }
-};
-
-function tableOfContents(userData) {
-    if (userData.confirmToc) {
-        return `
-        ## Table of Contents
-
-        - [Installation](#installation)
-        - [Usage](#usage)
-        - [Credits](#credits)
-        - [License](#license)
-        `;
-    } else {
-        return '';
-    }
+if (license === '') {
+return '';
 }
 
-function installSteps(instData) {
-  return `
-  ${instData
-    .filter(({ steps }) => steps)
-    .map(({ step }) => {
-      return `
-      - ${step}
-      `;
-    })
-  .join('')}
-  `;
+return `
+
+## License
+
+${license}
+`;
 };
 
-// TODO: Create a function to generate markdown for README
+// function that adds a table of contents based on user input
+function tableOfContents(confirm) {
+if (!confirm) {
+    return '';
+    
+}
+return `
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+`;
+};
+
+function installSection(install) {
+if (install === '') {
+    return '';
+}
+
+const installArr = install.split(', ');
+return `
+
+## Installation
+
+${installArr.map(installStep => {
+return `- ${installStep}
+`;
+})}
+`;    
+};
+
+function usageSection(usage) {
+if (usage === '') {
+    return '';
+}
+
+const usageArr = usage.split(', ');
+return `
+
+## Usage
+
+${usageArr.map(usageStep => {
+return `- ${usageStep}
+`;
+})}
+`;    
+};
+
+function creditsSection(credits) {
+if (credits === '') {
+    return '';
+}
+
+const creditsArr = credits.split(', ');
+return `
+
+## Credits
+
+${creditsArr.map(creditsStep => {
+return `- ${creditsStep}
+`;
+})}
+`;    
+};
+
+// function to generate markdown for README
 function generateMarkdown(userData) {
-  return `# ${userData.title}
+return `
 
-  ## Description
-  ${userData.description}
+# ${userData.title}
 
-  ${tableOfContents}
+## Description
 
-  ## Installation
+${userData.description}
 
-  ${installSteps}
+${tableOfContents(userData.confirmToc)}
 
-  ## Usage
-`
-//   ${userData.usage}
+${installSection(userData.install)}
 
-//   ${credits}
+${usageSection(userData.usage)}
 
-//   ${renderLicenseSection()}
-;
+${creditsSection(userData.credits)}
+
+${renderLicenseSection(userData.license)}
+
+
+Made by ${userData.name}.
+Find me on GitHub @ [${userData.github}](https://github.com/${userData.github})
+`;
 }
 
 module.exports = generateMarkdown;

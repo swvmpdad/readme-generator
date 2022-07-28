@@ -1,6 +1,8 @@
 // TODO: Include packages needed for this application
 // const writeFile = require('.utils/generateMarkdown.js');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./src/page-template');
+const writeFile = require('./utils/generateMarkdown');
 // const generateMarkdown = require('./src/page-template.js');
 
 // TODO: Create an array of questions for user input
@@ -52,12 +54,12 @@ const promptUser = userData => {
         {
             type: 'input',
             name: 'install',
-            message: 'Provide any steps for installation of the app'
+            message: 'Provide any steps for installation of the app (separate steps with a comma)'
         },
         {
             type: 'input',
             name: 'usage',
-            message: 'Provide any steps for usage:'
+            message: 'Provide any steps for usage (separate steps with a comma):'
         },
         {
             type: 'checkbox',
@@ -69,7 +71,7 @@ const promptUser = userData => {
         {
             type: 'input',
             name: 'credits',
-            message: 'Add any collaborators, assets, or tutorials used here:'
+            message: 'Add any collaborators, assets, or tutorials used here (add names and github links separated by commas):'
         },
         {
             type: 'input',
@@ -85,56 +87,17 @@ const promptUser = userData => {
 
 };
 
-// const promptInstall = instData => {
-//     console.log(`
-//     ========================
-//     Add an Installation Step
-//     ========================
-//     `);
-//             if (!instData.steps) {
-//                 instData.steps = [];
-//             }
-//         return inquirer
-//             .prompt([
-//                 {
-//                     type: 'input',
-//                     name: 'step',
-//                     message: 'Add a step to install your project.',
-//                     validate: nameInput => {
-//                         if (nameInput) {
-//                             return true;
-//                         } else {
-//                             console.log('Please enter a valid step.');
-//                             return false;
-//                         }
-//                     }
-//                 },
-//                 {
-//                     type: 'confirm',
-//                     name: 'confirmAddStep',
-//                     message: 'Would you like to add another step?',
-//                     default: false
-//                 }
-//             ])
-//             .then(installData => {
-//                 instData.steps.push(installData);
-//                 if (installData.confirmAddStep) {
-//                     return promptInstall(instData);
-//                 } else {;
-//                     return instData;
-//                 }
-//             });
-// };
-
 // Function call to initialize app
 promptUser()
     .then(userData => {
-        console.log(userData);
+        return generateMarkdown(userData);
     })
-    // .then(promptInstall)
-    // .then(instData => {
-    //     console.log(instData);
-    // })
+    .then(pageMd => {
+        return writeFile(pageMd);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+    })
     .catch(err => {
         console.log(err);
     });
