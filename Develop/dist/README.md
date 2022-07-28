@@ -1,57 +1,51 @@
 
 
-# test
+    # test
 
-## Description
+    ## Description
 
-test
+    test
 
+    
 
+    
 
-## Table of Contents
+    ## Installation
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+    - please work
+    ,-  please work
+    ,-  please work
+    
+    
 
+    
 
+    ## Usage
 
+    - please work
+    ,-  please work
+    ,-  please work
+    
+    
 
-## Installation
+    
 
-- first you go here
-,- then you go there
-,- then you install this
+    ## Credits
 
+    - please work
+    ,-  please work
+    ,-  please work
+    
+    
 
+    
 
+    ## License
 
-
-## Usage
-
-- first you eat
-,- then drink
-,- then poop
-
-
-
-
-
-## Credits
-
-- no i dont
-,- I work alone
-
-
-
-
-
-## License
-
-MIT
+    GNU LGPLv3
+    
 
 
-
-Made by garrett.
-Find me on GitHub @ [swvmpdad](https://github.com/swvmpdad)
+    Made by g.
+    Find me on GitHub @ [g](https://github.com/g)
+    
