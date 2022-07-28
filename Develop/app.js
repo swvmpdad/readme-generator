@@ -8,7 +8,7 @@ const questions = [];
 function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
-const promptUser = data => {
+const promptUser = userData => {
     console.log(`
     =========================
     Let's Create Your README!
@@ -42,6 +42,7 @@ const promptUser = data => {
             }
         }
     ]);
+
 };
 
 const promptToc = tocConfirm => {
@@ -58,41 +59,56 @@ const promptInstall = instData => {
     ========================
     Add an Installation Step
     ========================
-    `)
-    if (!instData.steps) {
-        instData.steps = [];
-    }
-    return inquirer
-    .prompt([
-        {
-            type: 'input',
-            name: 'step',
-            message: 'Add a step to install your project.',
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log('Please enter a valid step.');
-                    return false;
+    `);
+            // if (!instData.arr) {
+            //     instData.arr = [];
+            // }
+        return inquirer
+            .prompt([
+                {
+                    type: 'input',
+                    name: 'step',
+                    message: 'Add a step to install your project.',
+                    validate: nameInput => {
+                        if (nameInput) {
+                            return true;
+                        } else {
+                            console.log('Please enter a valid step.');
+                            return false;
+                        }
+                    }
+                },
+                {
+                    type: 'confirm',
+                    name: 'confirmAddStep',
+                    message: 'Would you like to add another step?',
+                    default: false
                 }
-            }
-        },
-        {
-            type: 'confirm',
-            name: 'confirmAddStep',
-            message: 'Would you like to add another step?',
-            default: false
-        }
-    ])
-    .then(instData => {
-        instData.steps.push(instData);
-        if (instData.confirmAddStep) {
-            return promptInstall(instData);
-        } else {
-            return instData;
-        }
-    });
+            ])
+            .then(installData => {
+                instData.name.push(installData);
+                if (installData.confirmAddStep) {
+                    return promptInstall(instData);
+                } else {
+                    console.log(instData);
+                    return instData;
+                }
+            });
 };
 
 // Function call to initialize app
-init();
+promptUser()
+    .then(userData => {
+        console.log(userData);
+    })
+    .then(promptToc)
+    .then(tocConfirm => {
+        console.log(tocConfirm);
+    })
+    .then(promptInstall)
+    .then(instData => {
+        return instData;
+    })
+    .catch(err => {
+        console.log(err);
+    });
