@@ -1,113 +1,113 @@
 // function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-    if (license === '') {
-    return '';
-    }
+if (license === '') {
+return '';
+}
 
-    return `
+return `
 
-    ## License
+## License
 
-    ${license}
-    `;
+${license}
+`;
 };
 
 // function that adds a table of contents based on user input
 function tableOfContents(confirm) {
-    if (!confirm) {
-        return '';
-        
-    }
-    return `
+if (!confirm) {
+    return '';
+    
+}
+return `
 
-    ## Table of Contents
+## Table of Contents
 
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Credits](#credits)
-    - [License](#license)
-    `;
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+`;
 };
 
 // function to list the installation steps
 function installSection(install) {
-    if (install === '') {
-        return '';
-    }
+if (install === '') {
+    return '';
+}
 
-    const installArr = install.split(',');
-    return `
+var installArr = install.split(', ');
+return `
 
-    ## Installation
+## Installation
 
-    ${installArr.map(installStep => {
-    return `- ${installStep.split(',').filter(x => x.trim()).join()}
-    `;
-    })}
-    `;    
+${installArr.map(installStep => {
+return `- ${installStep} 
+`;
+}).join('')}
+`;    
 };
 
 // function to list the usage steps
 function usageSection(usage) {
-    if (usage === '') {
-        return '';
-    }
+if (usage === '') {
+    return '';
+}
 
-    const usageArr = usage.split(',');
-    return `
+// var usageArr = usage.split(',');
+return `
 
-    ## Usage
+## Usage
 
-    ${usageArr.map(usageStep => {
-    return `- ${usageStep.split(',').filter(x => x.trim()).join()}
-    `;
-    })}
-    `;    
+${usage.split(', ').map(usageStep => {
+return `- ${usageStep}
+`;
+}).join('')}
+`;    
 };
 
 // function to list the credits
 function creditsSection(credits) {
-    if (credits === '') {
-        return '';
-    }
+if (credits === '') {
+    return '';
+}
 
-    const creditsArr = credits.split(',');
-    return `
+var creditsArr = credits.split(',');
+return `
 
-    ## Credits
+## Credits
 
-    ${creditsArr.map(creditsStep => {
-    return `- ${creditsStep.split(',').filter(x => x.trim()).join()}
-    `;
-    })}
-    `;    
+${creditsArr.map(creditsStep => {
+return `- ${creditsStep.replace(',', '')}
+`;
+}).join('')}
+`;    
 };
 
 // function to generate markdown for README
 function generateMarkdown(userData) {
-    return `
+return `
 
-    # ${userData.title}
+# ${userData.title}
 
-    ## Description
+## Description
 
-    ${userData.description}
+${userData.description}
 
-    ${tableOfContents(userData.confirmToc)}
+${tableOfContents(userData.confirmToc)}
 
-    ${installSection(userData.install)}
+${installSection(userData.install)}
 
-    ${usageSection(userData.usage)}
+${usageSection(userData.usage)}
 
-    ${creditsSection(userData.credits)}
+${creditsSection(userData.credits)}
 
-    ${renderLicenseSection(userData.license)}
+${renderLicenseSection(userData.license)}
 
 
-    Made by ${userData.name}.
-    Find me on GitHub @ [${userData.github}](https://github.com/${userData.github})
-    `;
+Made by ${userData.name}.
+Find me on GitHub @ [${userData.github}](https://github.com/${userData.github})
+`;
 };
 
 module.exports = generateMarkdown;

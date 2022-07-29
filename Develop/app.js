@@ -66,7 +66,8 @@ const promptUser = userData => {
             name: 'license',
             message: 'Did you use a license for this project?',
             choices: ['GNU AGPLv3', 'GNU GPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 
-                      'Apache License 2.0', 'MIT', 'Boost Software License 1.0', 'Unilicense']
+                      'Apache License 2.0', 'MIT', 'Boost Software License 1.0', 'Unilicense', 'none'],
+            default: 'none'
         },
         {
             type: 'input',
